@@ -1,5 +1,5 @@
-import { loginUser } from "../services/loginService.ts";
-import { loginSchema } from "../validators/loginValidator.ts";
+import { loginUser } from "../../services/loginService.ts";
+import { loginSchema } from "../../validators/loginValidator.ts";
 import type { NextFunction, Request, Response } from "express";
 
 export const loginController = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
