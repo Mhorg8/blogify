@@ -1,13 +1,14 @@
 import express from "express";
 import { connectDB, disconnectDB } from "./config/db.ts";
-import blogRoute from "./routes/blogRoute.ts";
+import authRoute from "./routes/authRoute.ts";
 
 connectDB();
 
 const PORT = 5001;
 const app = express();
+app.use(express.json());
 
-app.use("/blogs", blogRoute);
+app.use("/auth", authRoute);
 
 const server = app.listen(PORT, () => {
   console.log(`Server run on http://localhost:${PORT}`);

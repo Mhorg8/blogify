@@ -1,10 +1,9 @@
 import { Router } from "express";
-import type { Request, Response } from 'express'
+import { register } from "../controllers/authController.ts";
 
 const router = Router();
 
-router.get("/", (_req: Request, res: Response) => {
-    res.json("blogs");
-});
+router.post('/register', register)
+router.post('/login', login)
 
 export default router;
