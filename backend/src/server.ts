@@ -2,6 +2,7 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import { connectDB, disconnectDB } from "./config/db.ts";
 import authRoute from "./routes/authRoute.ts";
+import blogRoute from "./routes/blogRoute.ts";
 import { errorMiddleware } from "./middleware/errorMiddleware.ts";
 
 connectDB();
@@ -12,6 +13,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", authRoute);
+app.use("/blog", blogRoute);
 app.use(errorMiddleware);
 
 const server = app.listen(PORT, () => {

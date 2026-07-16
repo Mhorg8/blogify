@@ -42,7 +42,6 @@ model RefreshToken {
 model Blog {
   id                String   @id @unique @default(uuid())
   title             String
-  writer            String
   short_description String
   Description       String
   like_count        Int
