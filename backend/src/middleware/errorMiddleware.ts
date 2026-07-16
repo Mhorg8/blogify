@@ -1,5 +1,7 @@
 import type { ErrorRequestHandler } from "express";
 
+type ErrorWithStatus = Error & { status?: number; statusCode?: number };
+
 export const errorMiddleware: ErrorRequestHandler = (
     error,
     _req,
@@ -7,8 +9,11 @@ export const errorMiddleware: ErrorRequestHandler = (
     _next,
 ) => {
     console.error(error);
+    const knownError = error as ErrorWithStatus;
+    const statusCode = knownError.statusCode ?? knownError.status ?? 500;
+    const message = statusCode >= 500 ? "Internal server error" : knownError.message;
 
-    res.status(500).json({
-        message: "Internal server error",
+    res.status(statusCode).json({
+        message,
     });
 };

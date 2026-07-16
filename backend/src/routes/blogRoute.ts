@@ -1,7 +1,7 @@
 import { Router } from "express";
-import type { Request, Response } from 'express'
+import type { Request, Response, Router as ExpressRouter } from "express";
 
-const router = Router();
+const router: ExpressRouter = Router();
 
 router.get("/", (_req: Request, res: Response) => {
   res.json("blogs");
