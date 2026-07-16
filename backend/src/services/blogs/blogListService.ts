@@ -13,6 +13,19 @@ export const getBlogList = async () => {
             },
         });
 
+        await prisma.blog.updateMany({
+            data: {
+                view_count: {
+                    increment: 1
+                }
+            },
+            where: {
+                id: {
+                    in: blogs.map((blog) => blog.id)
+                }
+            }
+        })
+
         return blogs.map(({ author, ...blog }) => ({
             ...blog,
             author: author.name,
