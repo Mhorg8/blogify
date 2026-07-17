@@ -51,6 +51,54 @@ export const getBlogList = async (userId?: string) => {
     }
 }
 
+export const getBlogDetailBySlug = async (slug: string) => {
+    try {
+        const blog = await prisma.blog.findFirst({
+            where: {
+                title: slug
+            }, include: {
+                author: {
+                    select: {
+                        name: true,
+                        email: true
+                    },
+                },
+                comments: {
+                    select: {
+                        author: {
+                            select: { name: true, email: true }
+                        },
+                        content: true,
+                        createdAt: true
+                    }
+                },
+                blogLikes: true
+            }
+        })
+
+        if (!blog) {
+            throw new AppError(404, "Blog not found")
+        }
+
+        return {
+            blog: {
+                ...blog,
+                author: blog.author.name,
+                authorEmail: blog.author.email,
+                comments: blog.comments.map((comment) => ({
+                    content: comment.content,
+                    createdAt: comment.createdAt,
+                    commenter: {
+                        name: comment.author.name,
+                        email: comment.author.email
+                    }
+                }))
+            }
+        }
+    } catch (error) {
+
+    }
+}
 
 export const createBlogService = async (data: CreateBlogRequest, userId: string) => {
     const { title, Description, image, short_description } = data;
@@ -95,8 +143,6 @@ export const createCommentService = async ({ blogId, content }: CreateCommentReq
     })
     return comment
 }
-
-
 
 export const likeBlogService = async (blogId: string, userId: string) => {
     const blog = await prisma.blog.findUnique({
