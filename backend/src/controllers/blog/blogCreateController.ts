@@ -1,7 +1,7 @@
 import type { NextFunction, Request, Response } from "express";
 import type { ParamsDictionary } from "express-serve-static-core";
 import { createBlogSchema, type CreateBlogRequest } from "../../validators/createBlogValidator.ts";
-import { createBlogService } from "../../services/blogs/createBlogService.ts";
+import { createBlogService } from "../../services/blogs/blogServices.ts";
 
 export const blogCreateController = async (
     req: Request<ParamsDictionary, any, CreateBlogRequest>,

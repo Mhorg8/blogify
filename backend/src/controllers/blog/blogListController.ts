@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { getBlogList } from "../../services/blogs/blogListService.ts";
+import { getBlogList } from "../../services/blogs/blogServices.ts";
 
 export const blogListController = async (
     req: Request,

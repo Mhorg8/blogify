@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { likeBlogService } from "../../services/blogs/likeBlogService.ts";
+import { likeBlogService } from "../../services/blogs/blogServices.ts";
 
 export const blogLikeController = async (req: Request, res: Response, next: NextFunction) => {
     const userId = (req as Request & { user?: { userId: string } })?.user?.userId
