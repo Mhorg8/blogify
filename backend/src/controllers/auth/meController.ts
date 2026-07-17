@@ -12,12 +12,10 @@ export const meController = async (req: Request, res: Response, next: NextFuncti
 
         const user = await getProfile(userId);
 
-
         if (!user) {
             res.status(401).json({ message: "Unauthorized" });
             return;
         }
-
 
         res.status(200).json({
             message: "User fetched successfully",

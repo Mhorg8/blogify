@@ -1,8 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client"
   output   = "../src/generated/prisma"
@@ -21,6 +19,7 @@ model User {
   blogs         Blog[]
   comments      Comment[]
   refreshTokens RefreshToken[]
+  blogLikes     BlogLike[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,7 +39,7 @@ model RefreshToken {
 }
 
 model Blog {
-  id                String   @id @unique @default(uuid())
+  id                String   @id @default(uuid())
   title             String
   short_description String
   Description       String
@@ -51,7 +50,8 @@ model Blog {
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
 
-  comments Comment[]
+  comments  Comment[]
+  blogLikes BlogLike[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -66,6 +66,19 @@ model Comment {
 
   authorId String
   author   User   @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model BlogLike {
+  id Int @id @default(autoincrement())
+
+  blogId String
+  userId String
+
+  blog Blog @relation(fields: [blogId], references: [id])
+  user User @relation(fields: [userId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
