@@ -13,17 +13,38 @@ export const getBlogList = async (userId?: string) => {
                         email: true,
                     },
                 },
+                comments: {
+                    select: {
+                        content: true,
+                        createdAt: true,
+                        author: {
+                            select: {
+                                name: true,
+                                email: true,
+                            },
+                        },
+                    },
+                    orderBy: { createdAt: "desc" },
+                },
                 blogLikes: userId
                     ? { where: { userId }, select: { id: true } }
                     : false,
             },
         });
 
-        return blogs.map(({ author, blogLikes, ...blog }) => ({
+        return blogs.map(({ author, blogLikes, comments, ...blog }) => ({
             ...blog,
             author: author.name,
             authorEmail: author.email,
             liked: Array.isArray(blogLikes) ? blogLikes.length > 0 : false,
+            comments: comments.map((comment) => ({
+                content: comment.content,
+                createdAt: comment.createdAt,
+                commenter: {
+                    name: comment.author.name,
+                    email: comment.author.email,
+                },
+            })),
         }));
     } catch (error) {
         throw new AppError(500, "Failed to get blog list")
