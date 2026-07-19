@@ -1,6 +1,6 @@
-import { prisma } from "../config/db.ts";
-import { hashPassword } from "../utils/password.ts";
-import type { RegisterInput } from "../validators/authValidator.ts";
+import { prisma } from "../../config/db.ts";
+import { hashPassword } from "../../utils/password.ts";
+import type { RegisterInput } from "../../validators/authValidator.ts";
 
 export const createUser = async (data: RegisterInput) => {
 

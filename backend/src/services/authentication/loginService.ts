@@ -1,8 +1,8 @@
-import { prisma } from "../config/db.ts";
+import { prisma } from "../../config/db.ts";
 import { createHash } from "node:crypto";
-import { generateAccessToken, generateRefreshToken } from "../utils/generateToken.ts";
-import { verifyPassword } from "../utils/verifyPassword.ts";
-import type { loginInput } from "../validators/loginValidator.ts";
+import { generateAccessToken, generateRefreshToken } from "../../utils/generateToken.ts";
+import { verifyPassword } from "../../utils/verifyPassword.ts";
+import type { loginInput } from "../../validators/loginValidator.ts";
 
 type LoginResult = {
     accessToken: string;

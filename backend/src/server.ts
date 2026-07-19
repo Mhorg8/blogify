@@ -4,6 +4,7 @@ import { connectDB, disconnectDB } from "./config/db.ts";
 import authRoute from "./routes/authRoute.ts";
 import blogRoute from "./routes/blogRoute.ts";
 import { errorMiddleware } from "./middleware/errorMiddleware.ts";
+import usersRoute from "./routes/usersRoute.ts";
 
 connectDB();
 
@@ -14,6 +15,7 @@ app.use(cookieParser());
 
 app.use("/auth", authRoute);
 app.use("/blog", blogRoute);
+app.use("/users" , usersRoute)
 app.use(errorMiddleware);
 
 const server = app.listen(PORT, () => {

@@ -1,4 +1,4 @@
-import { prisma } from "../config/db.ts"
+import { prisma } from "../../config/db.ts"
 
 export const getProfile = async (userId: string) => {
     return await prisma.user.findUnique({

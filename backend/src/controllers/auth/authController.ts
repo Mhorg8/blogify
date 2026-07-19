@@ -1,6 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
 import { registerSchema } from "../../validators/authValidator.ts";
-import { createUser } from "../../services/authService.ts";
+import { createUser } from "../../services/authentication/authService.ts";
 export const registerController = async (req: Request, res: Response, next: NextFunction) => {
     const result = registerSchema.safeParse(req.body);
 

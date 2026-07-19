@@ -1,4 +1,4 @@
-import { loginUser } from "../../services/loginService.ts";
+import { loginUser } from "../../services/authentication/loginService.ts";
 import { loginSchema } from "../../validators/loginValidator.ts";
 import type { NextFunction, Request, Response } from "express";
 
